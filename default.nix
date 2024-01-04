@@ -22,6 +22,6 @@ hugo_0251 = pkgs.stdenv.mkDerivation {
 };
 in
   pkgs.mkShell {
-    inputsFrom = [ hugo_0251 ];
+    packages = [ hugo_0251 ];
     buildInputs = [ system_packages rpkgs ];
   }
