@@ -30,7 +30,7 @@ jobs:
           nix-build
 
       - name: list files
-        ls -la
+        run: ls -la
 
       - name: Build site
         run: |
