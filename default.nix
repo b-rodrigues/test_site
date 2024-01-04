@@ -6,22 +6,7 @@ let
  rpkgs = builtins.attrValues {
   inherit (pkgs.rPackages) blogdown;
 };
-hugo_0251 = pkgs.stdenv.mkDerivation {
-    name = "hugo_0251";
-    src = pkgs.fetchFromGitHub {
-      owner = "gohugoio";
-      repo = "hugo";
-      rev = "v0.25.1";
-      sha256 = "sha256-fwU1EHwui0OflOovzIOGdwjGoVsJyX0tKrwlT46uniU=";
-    };
-    buildInputs = [pkgs.go];
-    installPhase = ''
-      mkdir -p $out/bin
-      cp -r . $out/bin/
-    '';
-};
 in
   pkgs.mkShell {
-    packages = [ hugo_0251 ];
     buildInputs = [ system_packages rpkgs ];
   }
