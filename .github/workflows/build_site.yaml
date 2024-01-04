@@ -35,7 +35,7 @@ jobs:
 
       - name: Build site
         run: |
-          nix-shell default.nix --run "Rscript -e 'blogdown::build_site(build_rmd = TRUE)'"         
+          nix-shell default.nix --run "Rscript -e 'blogdown::build_site(local = TRUE, build_rmd = TRUE)'"         
 
       - name: Upload latest run
         run: |
