@@ -29,12 +29,6 @@ jobs:
         run: |
           nix-build
 
-      - name: list files
-        run: ls -la
-
-      - name: readlink
-        run: readlink result
-
       - name: Build site
         run: |
           nix-shell default.nix --run "Rscript -e 'blogdown::build_site()'"         
