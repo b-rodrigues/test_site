@@ -30,7 +30,8 @@ jobs:
           nix-build
 
       - name: Install Hugo from deb package
-        run: dpkg -i /github/workspace/hugo_0.25.1_Linux-64bit.deb
+        run: |
+          sudo dpkg -i /github/workspace/hugo_0.25.1_Linux-64bit.deb
 
       - name: Build site
         run: |
