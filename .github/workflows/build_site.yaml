@@ -1,0 +1,42 @@
+name: build-site
+
+on:
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  targets:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+    
+      - uses: actions/checkout@v3
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@main
+        with:
+          logger: pretty
+          log-directives: nix_installer=trace
+          backtrace: full
+
+      - name: Nix cache
+        uses: DeterminateSystems/magic-nix-cache-action@main
+
+      - name: Build development environment
+        run: |
+          nix-build
+
+      - name: Run model
+        run: |
+          nix-shell default.nix --run "Rscript -e 'blogdown::build_site()'"         
+
+      - name: Upload latest run
+        run: |
+          git config --local user.name "GitHub Actions"
+          git config --local user.email "actions@github.com"
+          git add public/
+          git commit -am "Updated blog"
+          git push origin master
