@@ -29,7 +29,10 @@ jobs:
         run: |
           nix-build
 
-      - name: Run model
+      - name: list files
+        ls -la
+
+      - name: Build site
         run: |
           nix-shell default.nix --run "Rscript -e 'blogdown::build_site()'"         
 
